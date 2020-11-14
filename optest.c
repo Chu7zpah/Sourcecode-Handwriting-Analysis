@@ -8,6 +8,9 @@ int main(void)
 
     b<<=a;
     printf("test%d", a, b);
+    printf("this is for test");
+
+    char * string = "this is you";
     
     for(int i = 0 ; i < 5 ; i++)
         break;
