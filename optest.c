@@ -14,7 +14,7 @@ int main(void)
     
     for(int i = 0 ; i < 5 ; i++)
         break;
-    
+
     hello(a, b);
     return 0;
 }
