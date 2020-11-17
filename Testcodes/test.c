@@ -26,7 +26,8 @@ int main(void)
         if(a == 0){
             break;
         }
-
+        /* This is test
+        and this also */
         else{
             float d;
             d = (float)a;
