@@ -3,10 +3,10 @@
 int main(void)
 {
     int t;
-    int a = 0; // 2-1
+    int a=0; // 2-1
     /* This is for test */
     if(a == 0) {    // 2-2
-        t = (float) a;  //1
+        t= (float) a;  //1
     }
     else    //2
     {
@@ -15,7 +15,7 @@ int main(void)
     /*
         This is for test two
     */
-    for (int i = 0 ; i < 5 ; i++)
+    for (int i= 0 ; i < 5 ; i++)
     {   //4
         break;
     }   //5
