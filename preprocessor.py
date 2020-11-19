@@ -8,7 +8,7 @@ comment_multiline_start = re.compile(r'/\*.*\n')
 comment_multiline_end = re.compile(r'\*/\n')
 
 def preprocess(file_path):
-    f = open(file_path, 'r')
+    f = open(file_path, 'r', encoding='utf-8')
     raw_line_list = f.readlines()
     no_string_line_list = []
     cleaned_line_list = []
