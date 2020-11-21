@@ -6,8 +6,7 @@ from preprocessor import preprocess
 from extractor import extract
 
 double_quote_feature_list = []      # Feature list for CSV feature columns
-programmer_list = ['L']
-#programmer_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']   # dataset labels(classes)
+programmer_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']   # dataset labels(classes)
 features_list = [
                     'inline_NO_brace', 'inline_YES_brace', 'nextline_brace', # Feature 1. Brace
                     'double_backslash_NO_Space', 'double_backslash_YES_Space', 'single_backslash_asterisk', # Feature 2. Comment
@@ -22,7 +21,7 @@ data_path = 'C:/Users/Nyx_24/Desktop/Dataset/'
 for feature in features_list:
     double_quote_feature_list.append(feature.replace(f'{feature}', f'"{feature}"')) 
 double_quote_feature_list.append(r'"Programmer"')
-csv_file = open('./CSVResult/L_added.csv', 'w', newline='', encoding='utf-8')
+csv_file = open('./CSVResult/Final_ABCDEFGH.csv', 'w', newline='', encoding='utf-8')
 wr = csv.writer(csv_file, quotechar="'")    # quotechar = '' (If not, " becomes """)
 wr.writerow(double_quote_feature_list)
 
