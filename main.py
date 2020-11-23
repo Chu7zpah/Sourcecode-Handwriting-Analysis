@@ -4,6 +4,7 @@ import os
 # from sklearn.preprocessing import StandardScaler
 from preprocessor import preprocess
 from extractor import extract
+from normalizer import new_normalize
 
 double_quote_feature_list = []      # Feature list for CSV feature columns
 programmer_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']   # dataset labels(classes)
@@ -21,16 +22,17 @@ data_path = 'C:/Users/Nyx_24/Desktop/Dataset/'
 for feature in features_list:
     double_quote_feature_list.append(feature.replace(f'{feature}', f'"{feature}"')) 
 double_quote_feature_list.append(r'"Programmer"')
-csv_file = open('./CSVResult/Final_ABCDEFGH.csv', 'w', newline='', encoding='utf-8')
+csv_file = open('./CSVResult/Normalized_Final_ABCDEFGH.csv', 'w', newline='', encoding='utf-8')
 wr = csv.writer(csv_file, quotechar="'")    # quotechar = '' (If not, " becomes """)
 wr.writerow(double_quote_feature_list)
 
 for programmer in programmer_list:
     for (path, dir, files) in os.walk(f'{data_path}{programmer}'):
         for filename in files:
-            preprocessed_line_list = []     # list for preprocessed codes (without strings, comments)
-            features_data_dictinoary = {}   # dictionary for extracted features data
-            features_data_list = []         # list for feature data values
+            preprocessed_line_list = []         # list for preprocessed codes (without strings, comments)
+            features_data_dictinoary = {}       # dictionary for extracted features data
+            new_features_data_dictionary = {}   # dictionary for normalized features data
+            features_data_list = []             # list for feature data values
 
             ext = os.path.splitext(filename)[-1]
             if ext == '.c':
@@ -42,8 +44,16 @@ for programmer in programmer_list:
                 preprocessed_line_list = preprocess(full_directory) # Preprocessing
                 features_data_dictinoary = extract(features_list, preprocessed_line_list)   # Extraction
 
-                for feature in features_data_dictinoary:
-                    features_data_list.append(features_data_dictinoary[feature])
+                new_features_data_dictionary = new_normalize(features_data_dictinoary)
+                print("features_data_dictionary")
+                print(features_data_dictinoary)
+                print("normalized_data_dictionary")
+                print(new_features_data_dictionary)
+
+                for feature in new_features_data_dictionary:
+                    features_data_list.append(new_features_data_dictionary[feature])
+                # for feature in features_data_dictinoary:
+                #     features_data_list.append(features_data_dictinoary[feature])
                 features_data_list.append(f'{programmer}')
                 wr.writerow(features_data_list) # Writing Data on CSV File
 
@@ -51,4 +61,6 @@ for programmer in programmer_list:
                 continue
         
             print("done")
+        
+    
 csv_file.close()
